@@ -1,0 +1,10 @@
+version: '3.2'
+
+# ports : host:container
+services:
+  mxtest:
+    build: .
+    image: fredmoser/mx-app-test:0.1-go
+    ports:
+      - 8080
+
