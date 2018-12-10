@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A simple websockets server.",
+  "private": true,
+  "main": "main.js",
+  "repository": "github:trepmag/map-x-tests.git",
+  "dependencies": {
+    "ws": "^6.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

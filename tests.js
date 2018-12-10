@@ -6,7 +6,7 @@
    */
 
   var elTests = document.getElementById("tests");
-  var wsUri = "wss://echo.websocket.org/";
+  var wsUri = "ws://localhost:8081/";
   var elWsRes = document.createElement("span");
   var ulWs = document.createElement("ul");
 

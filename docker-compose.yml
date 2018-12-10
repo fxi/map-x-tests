@@ -10,3 +10,12 @@ services:
     volumes:
       - ./:/web
 
+  nodejs:
+    image: node:10.14.1
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - ./server/:/home/node/app
+    ports:
+      - 8081:8081
+    command: sh -c "npm install && npm start"
