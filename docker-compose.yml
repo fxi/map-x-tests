@@ -10,12 +10,7 @@ services:
     volumes:
       - ./:/web
 
-  nodejs:
-    image: node:10.14.1
-    user: node
-    working_dir: /home/node/app
-    volumes:
-      - ./server/:/home/node/app
+  wsecho:
+    image: jmalloc/echo-server
     ports:
-      - 8081:8081
-    command: sh -c "npm install && npm start"
+      - 8081:8080
