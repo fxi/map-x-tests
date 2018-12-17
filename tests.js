@@ -7,6 +7,7 @@
 
   var elTests = document.getElementById("tests");
   var wsUri = "wss://echo.websocket.org/";
+  var wspingCount = 5;
   var elWsRes = document.createElement("span");
   var ulWs = document.createElement("ul");
 
@@ -155,14 +156,14 @@
   var wsresult = {
     open:"waiting...",
     close:"waiting...",
-    message:"waiting...",
-    send:"waiting...",
+    message:"sending " + wspingCount + " messages; waiting echos...",
     error:"none"
   };
 
   var wserror = false;
   for( var r in wsresult){
     var liWs = document.createElement("li");
+    liWs.classList.add("ws-"+r);
     var spanWs = document.createElement("span");
     spanWs.id="ws-"+r;
     spanWs.innerText = wsresult[r];
@@ -190,22 +191,43 @@
   }
   function onOpen(evt) {
     document.getElementById("ws-open").innerText = true;
-    doSend("WebSocket rocks");
+
+    // Sending "ping" messages
+    var elMsg = document.querySelector('.ws-message');
+    var elUl = document.createElement('ul');
+    elMsg.appendChild(elUl);
+    var pingui = 1;
+    var ping = function() {
+      var message = {
+        id: pingui,
+        content: 'ping item ' + pingui,
+      };
+      var elLi = document.createElement('li');
+      elLi.innerHTML = 'sending message: "' + message.content + '" <span class="response-item-' + pingui + '">...<span>';
+      elUl.appendChild(elLi);
+      websocket.send(JSON.stringify(message));
+      if (pingui >= wspingCount) {
+        clearInterval(si);
+      }
+      pingui++;
+    };
+    ping();
+    var si = setInterval(ping, 2000);
   }
   function onClose(evt) {
     document.getElementById("ws-close").innerText = true;
   } 
   function onMessage(evt) { 
-    document.getElementById("ws-message").innerText = true;
-    websocket.close(); 
+    var message = JSON.parse(evt.data);
+    document.querySelector('.response-item-' + message.id).innerText = '; echoed: "' + message.content + '"';
+    if (message.id >= wspingCount) {
+      websocket.close();
+      document.getElementById("ws-message").innerText = 'done';
+    }
   } 
   function onError(evt) { 
     document.getElementById("ws-error").innerText = true;
     console.log(evt);
-  } 
-  function doSend(message) {
-    document.getElementById("ws-send").innerText = true;
-    websocket.send(message);
   } 
 
 })();
