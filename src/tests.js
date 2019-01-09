@@ -39,7 +39,7 @@
   };
 
   for (var t in tests) {
-    var el = document.createElement("p");
+    var el = document.createElement("li");
     el.classList.add(t);
     var test = (tests[t]['result'] !== undefined) ? tests[t]['result'] : tests[t];
     if(test instanceof Node){
