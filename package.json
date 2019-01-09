@@ -1,0 +1,29 @@
+{
+  "name": "map-x-tests",
+  "version": "1.0.0",
+  "description": "http://fxi.io/map-x-tests/",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --config webpack.dev.config.js",
+    "prod": "webpack --config webpack.prod.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trepmag/map-x-tests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trepmag/map-x-tests/issues"
+  },
+  "homepage": "https://github.com/trepmag/map-x-tests#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-merge": "^4.1.5"
+  }
+}
