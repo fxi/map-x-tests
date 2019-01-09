@@ -9,3 +9,8 @@ services:
       - 8080:8080
     volumes:
       - ./dist/:/web
+
+  wsecho:
+    image: jmalloc/echo-server
+    ports:
+      - 8081:8080
