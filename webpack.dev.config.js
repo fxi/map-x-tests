@@ -9,7 +9,11 @@ module.exports = merge(baseConfig, {
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 3000,
-      server: { baseDir: ['dist'] }
+      server: { baseDir: ['dist'] },
+      files: [
+        "dist/index.html",
+        "src/test.js"
+      ]
     }),
     new webpack.DefinePlugin({
       WS_WEBSOCKET_ORG_URI: JSON.stringify('wss://echo.websocket.org/'),

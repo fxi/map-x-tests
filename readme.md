@@ -15,9 +15,9 @@ Sources :
 
 ## Build
 
-Use the following instruction to build:
+Use the following instructions to build:
 
 ```
-$ npm run prod # build prod output
-$ npm run dev [-- --watch] # build dev output and optionnaly use browserSync
+$ npm run build:prod # build prod output
+$ npm run build:dev [-- --watch] # build dev output and optionally use browserSync
 ```

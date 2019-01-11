@@ -2,7 +2,7 @@
 
   /*
    * TEST OF MAPBOX GL AND WEBSOCKET: one by one
-   * based on https://github.com/mapbox/mapbox-gl-supported/blob/gh-pages/index.js 
+   * based on https://github.com/mapbox/mapbox-gl-supported/blob/gh-pages/index.js
    */
 
   var elTests = document.getElementById("tests");
@@ -195,7 +195,7 @@
       websocket.onerror = function(evt) { onError(evt, ulWs); };
     }
     catch(err){
-      onError(err); 
+      onError(err);
     }
     return ulWs;
   }
@@ -226,7 +226,7 @@
   }
   function onClose(evt, ulWs) {
     ulWs.querySelector("#ws-close").innerText = true;
-  } 
+  }
   function onMessage(evt, wsTestId, ulWs) {
     try {
       var message = JSON.parse(evt.data);
@@ -242,10 +242,9 @@
         ulWs.querySelector("#ws-message").innerText = 'done';
       }
     }
-  } 
+  }
   function onError(evt, ulWs) {
     ulWs.querySelector("#ws-error").innerText = true;
-  } 
+  }
 
 })();
-
