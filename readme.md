@@ -12,3 +12,12 @@ Sources :
 
 - https://github.com/mapbox/mapbox-gl-supported
 - https://gist.github.com/miebach/3293565
+
+## Build
+
+Use the following instructions to build:
+
+```
+$ npm run build:prod # build prod output
+$ npm run build:dev [-- --watch] # build dev output and optionally use browserSync
+```

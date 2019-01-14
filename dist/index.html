@@ -6,27 +6,18 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style type="text/css">
-
-body,
-html {
-  font-family: sans, helvetica;
-}
-
-span {
-  padding: 3px;
-}
-    </style>
-
-
-
   </head>
   <body>
     <h1>Mapbox GL JS and Websocket</h1>
     <h2>Tests for your browser functionalities</h2>
-    <button onclick=copyResults() >Copy to your clipboard</button>
-    <div id="tests"></div>
-    <script src="tests.js"></script> 
+    <button id="copy-to-clipboard" onclick="copyResults()">Copy to your clipboard</button>
+    <button id="end-websocket-test">End websocket test
+      <span class="throbber">
+        (running<span>.</span><span>.</span><span>.</span>)
+      </span>
+    </button>
+    <ul id="tests"></ul>
+    <script src="main.js"></script>
     <script>
       function copyResults(){
         var elResults = document.getElementById("tests");
