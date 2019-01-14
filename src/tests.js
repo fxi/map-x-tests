@@ -16,7 +16,6 @@
       instance: null
     }
   };
-  var wspingCount = 5;
 
   var tests = {
     browser: !!isBrowser(),
@@ -168,12 +167,37 @@
   /**
    * websocket
    */
+
+  // Disable/undisable copy-to-clipboard button
+  var btC2C = document.querySelector('#copy-to-clipboard');
+  btC2C.disabled = true;
+  var eventWsTestTerminate = new Event('ws_test_terminate');
+  document.addEventListener('ws_test_terminate', function (e) {
+    if (this._terminateCount === undefined) {
+      this._terminateCount = 0;
+    }
+    this._terminateCount++;
+    if (this._terminateCount > 1) {
+      btC2C.disabled = false;
+      btWsEndTest.disabled = true;
+      btWsEndTest.querySelector('.throbber').classList.add('hidden');
+    }
+  });
+
+  // Allow to end websocket test
+  var wsTestEnd = false;
+  var btWsEndTest = document.querySelector('#end-websocket-test');
+  btWsEndTest.addEventListener('click', function (e) {
+    wsTestEnd = true;
+    btWsEndTest.disabled = true;
+  });
+
   function isWebsocketSupported(wsTestId){
     var ulWs = document.createElement("ul");
     var wsresult = {
       open:"waiting...",
       close:"waiting...",
-      message:"sending " + wspingCount + " messages; waiting echos...",
+      message:"sending messages; waiting echos...",
       error:"none"
     };
     for( var r in wsresult){
@@ -216,7 +240,7 @@
       elLi.innerHTML = 'sending message: "' + message.content + '" <span class="response-item-' + pingui + '">...<span>';
       elUl.appendChild(elLi);
       websockets[wsTestId].instance.send(JSON.stringify(message));
-      if (pingui >= wspingCount) {
+      if (wsTestEnd) {
         clearInterval(si);
       }
       pingui++;
@@ -237,14 +261,16 @@
     }
     if (message) {
       ulWs.querySelector('.response-item-' + message.id).innerText = '; echoed: "' + message.content + '"';
-      if (message.id >= wspingCount) {
+      if (wsTestEnd) {
         websockets[wsTestId].instance.close();
         ulWs.querySelector("#ws-message").innerText = 'done';
+        document.dispatchEvent(eventWsTestTerminate);
       }
     }
   }
   function onError(evt, ulWs) {
     ulWs.querySelector("#ws-error").innerText = true;
+    document.dispatchEvent(eventWsTestTerminate);
   }
 
 })();
